@@ -73,12 +73,23 @@ public:
 			return steck2.top();
 		}
 	}
+
+	friend std::ostream& operator<<(std::ostream& out, QueueOnTwoStacks<int>& other) // how can i do this?
+	{
+		QueueOnTwoStacks<int> temp = other;
+		for (int count = 0; count < other.size(); count++) {
+			out << temp.front() << "\t";
+			temp.pop();
+		}
+		return out;
+	}
+
 };
 
 int main() {
 	QueueOnTwoStacks<int> other;
 
-	for (int count = 0; count < 100; count++) {
+	for (int count = 0; count < 10; count++) {
 		other.push(count);
 	}
 
@@ -87,23 +98,20 @@ int main() {
 	else
 		std::cout << "NOUP" << std::endl;
 
-	for (int count = 0; count < 100; count++) {
-		std::cout << other.front() << "\t";
-		other.pop();
-	}
 
-	std::cout << std::endl;
-
+	std::cout << other <<std::endl;
+	other.pop();
+	std::cout << other << std::endl;
 	QueueOnTwoStacks<int> other2;
 	for (int count = 0; count < 100; count++) {
 		other2.push(count);
 	}
-
+	
 	if (other2.IsEmpty())
 		std::cout << "YES" << std::endl;
 	else
 		std::cout << "NOUP" << std::endl;
-
+	
 	for (int count = 0; count < 10; count++) {
 		std::cout << other2.back() << std::endl;
 		other2.push(count + 1000);
